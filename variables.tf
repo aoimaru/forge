@@ -8,7 +8,7 @@ variable "environment" {
     type = string 
     validation {
         condition = contains(["prod", "stg", "dev"], var.environment)
-        error_message = "環境名は'dev', 'stg', 'prod'のいずれかである必要があります"
+        error_message = "The environment must be one of 'dev', 'stg', or 'prod'."
     }
 }
 
@@ -17,12 +17,13 @@ variable "ver" {
     type = string
 }
 
+
 variable "cidr_block" {
-  description = "VPCのCIDRブロック"
+  description = "CIDR block for the VPC."
   type        = string
-  default     = "10.0.0.0/16"
+
   validation {
-    condition     = can(cidrhost(var.vpc_cidr, 0))
-    error_message = "有効なCIDRブロックを指定してください。"
+    condition     = can(cidrhost(var.cidr_block, 0))
+    error_message = "Please specify a valid CIDR block."
   }
 }
