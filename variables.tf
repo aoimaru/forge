@@ -17,3 +17,13 @@ variable "ver" {
     type = string
 }
 
+
+variable "cidr_block" {
+  description = "CIDR block for the VPC."
+  type        = string
+
+  validation {
+    condition     = can(cidrhost(var.cidr_block, 0))
+    error_message = "Please specify a valid CIDR block."
+  }
+}
