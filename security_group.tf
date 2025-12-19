@@ -14,15 +14,6 @@ resource "aws_security_group" "app_sg" {
     Ver     = var.ver
   }
 }
-# web→アプリ
-resource "aws_security_group_rule" "app_rule_from_web_to_app" {
-  security_group_id        = aws_security_group.app_sg.id
-  type                     = "ingress"
-  protocol                 = "tcp"
-  from_port                = 8080
-  to_port                  = 8080
-  source_security_group_id = aws_security_group.web_sg.id # web用のセキュリティグループに紐づく通信のみを許可する
-}
 # 踏み台サーバ→アプリ
 resource "aws_security_group_rule" "app_rule_opmng_to_app" {
   security_group_id        = aws_security_group.app_sg.id
